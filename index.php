@@ -118,7 +118,7 @@ if(!isset($_GET['action'])) {
     echo '</pre>';
 
     echo '<h3>User Info</h3>';
-    echo '<h4>from: https://www.googleapis.com/oauth2/v3/userinfo </h4>'
+    //echo '<h4>from: https://www.googleapis.com/oauth2/v3/userinfo </h4>'
     echo '<pre>';
     $ch = curl_init('https://www.googleapis.com/oauth2/v3/userinfo');
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -128,7 +128,7 @@ if(!isset($_GET['action'])) {
     echo '</pre>';
 
     echo '<h3>Events from User Calendar</h3>';
-    echo '<h4>from: https://www.googleapis.com/calendar/v3/calendars/primary/events </h4>'
+    //echo '<h4>from: https://www.googleapis.com/calendar/v3/calendars/primary/events </h4>'
     echo '<pre>';
     $ch = curl_init('https://www.googleapis.com/calendar/v3/calendars/primary/events');
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
