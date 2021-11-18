@@ -2,8 +2,8 @@
 
 // http://localhost/SignInWithGoogle/
 // Google Credentials
-$googleClientID = '####.apps.googleusercontent.com';
-$googleClientSecret = '####';
+$googleClientID = getenv("CLIENT_ID");
+$googleClientSecret = getenv("CLIENT_SECRET");
 
 // This is the URL we'll send the user to first to get their authorization
 $authorizeURL = 'https://accounts.google.com/o/oauth2/v2/auth';
