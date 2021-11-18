@@ -1,7 +1,7 @@
 <?php
 
 // http://localhost/SignInWithGoogle/
-// Google Credentials
+// Read Google Client App Credentials from App Settings
 $googleClientID = getenv("CLIENT_ID");
 $googleClientSecret = getenv("CLIENT_SECRET");
 
