@@ -4,6 +4,7 @@
 // Read Google Client App Credentials from App Settings
 $googleClientID = getenv("CLIENT_ID");
 $googleClientSecret = getenv("CLIENT_SECRET");
+$siteBaseURL = getenv("SITE_BASE_URL");
 
 // This is the URL we'll send the user to first to get their authorization
 $authorizeURL = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -12,7 +13,8 @@ $authorizeURL = 'https://accounts.google.com/o/oauth2/v2/auth';
 $tokenURL = 'https://www.googleapis.com/oauth2/v4/token';
 
 // The URL for this script, used as the redirect URL
-$baseURL = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
+//$baseURL = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
+$baseURL = $siteBaseURL . $_SERVER['PHP_SELF'];
 
 // Start a session so we have a place to store things between redirects
 session_start();
