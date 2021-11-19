@@ -68,6 +68,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'login') {
   // Redirect the user to Google's authorization page
   header('Location: ' . $authorizeURL . '?' . http_build_query($params));
   die();
+  exit();
 }
 
 if(isset($_GET['action']) && $_GET['action'] == 'logout') {
