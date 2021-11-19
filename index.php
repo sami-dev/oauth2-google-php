@@ -29,7 +29,7 @@ $googleClientSecret = getenv("CLIENT_SECRET");
 $siteBaseURL = getenv("SITE_BASE_URL");
   
 echo '$googleClientID: ' . $googleClientID;
-echo '$googleClientSecret: ' . $$googleClientSecret;
+echo '$googleClientSecret: ' . $googleClientSecret;
 echo '$siteBaseURL: ' . $siteBaseURL;
 
 // This is the URL we'll send the user to first to get their authorization
