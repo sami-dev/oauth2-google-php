@@ -99,6 +99,7 @@ if(isset($_GET['code'])) {
   ]));
   $response = curl_exec($ch);
   $data = json_decode($response, true);
+  print_r($data);
 
   // Note: You'd probably want to use a real JWT library
   // but this will do in a pinch. This is only safe to do
