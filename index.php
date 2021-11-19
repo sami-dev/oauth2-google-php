@@ -27,8 +27,10 @@
 $googleClientID = getenv("CLIENT_ID");
 $googleClientSecret = getenv("CLIENT_SECRET");
 $siteBaseURL = getenv("SITE_BASE_URL");
+  
+echo 'googleClientID: ' . $googleClientID;
 
-  // This is the URL we'll send the user to first to get their authorization
+// This is the URL we'll send the user to first to get their authorization
 $authorizeURL = 'https://accounts.google.com/o/oauth2/v2/auth';
 
 // This is Google's OpenID Connect token endpoint
