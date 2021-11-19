@@ -1,12 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign-in with Google</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link   rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+        crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<header class="w3-container w3-red">
+  <h1>Sign in With Google Example</h1>
+</header>
+<div class="container">
+<div class="row">
+    <div class="col">&nbsp;
+    </div>
+</div>
 <?php
 
 // http://localhost/SignInWithGoogle/
-// Read Google Client App Credentials from App Settings
+// Google Credentials
 $googleClientID = getenv("CLIENT_ID");
 $googleClientSecret = getenv("CLIENT_SECRET");
 $siteBaseURL = getenv("SITE_BASE_URL");
 
-// This is the URL we'll send the user to first to get their authorization
+  // This is the URL we'll send the user to first to get their authorization
 $authorizeURL = 'https://accounts.google.com/o/oauth2/v2/auth';
 
 // This is Google's OpenID Connect token endpoint
@@ -94,31 +116,44 @@ if(isset($_GET['code'])) {
   die();
 }
 
-
-
 // If there is a user ID in the session
 // the user is already logged in
 if(!isset($_GET['action'])) {
   if(!empty($_SESSION['user_id'])) {
-    echo '<h3>Logged In</h3>';
+    echo '<div class="w3-panel w3-pale-sand w3-border">';
+    echo '<h3>User Information:</h3>';
     echo '<p>User ID: '.$_SESSION['user_id'].'</p>';
     echo '<p>Email: '.$_SESSION['email'].'</p>';
-    echo '<p><a href="?action=logout">Log Out</a></p>';
+    //echo '<p><a href="?action=logout">Log Out</a></p>';
+    echo '<a href="?action=logout" class="btn btn-info btn-lg">';
+    echo '<span class="glyphicon glyphicon-log-out"></span> Log out';
+    echo '</a>';
+    echo '</div>';
 
-    echo '<h3>ID Token</h3>';
-    echo '<pre>';
+    echo '<div class="w3-panel w3-pale-yellow w3-border">';
+    echo '<h3>Id Token</h3>';
+    echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
     print_r($_SESSION['id_token']);
-    echo '</pre>';
+    echo '</span>';  
+    echo '</div>';
+
+    echo '<div class="w3-panel w3-pale-red w3-border">';
+    echo '<h3>Decoded Id Token</h3>';
     echo '<pre>';
     print_r($_SESSION['userinfo']);
     echo '</pre>';
+    echo '</div>';
+    
+    echo '<div class="w3-panel w3-pale-orange w3-border">';
     echo '<h3>Access Token</h3>';
-    echo '<pre>';
+    echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
     print_r($_SESSION['access_token']);
-    echo '</pre>';
+    echo '</span>'; 
+    echo '</div>';
 
+    echo '<div class="w3-panel w3-pale-blue w3-border">';
     echo '<h3>User Info</h3>';
-    //echo '<h4>from: https://www.googleapis.com/oauth2/v3/userinfo </h4>'
+    echo '<h6>Google User Info API URL: https://www.googleapis.com/oauth2/v3/userinfo </h6>';
     echo '<pre>';
     $ch = curl_init('https://www.googleapis.com/oauth2/v3/userinfo');
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -126,9 +161,12 @@ if(!isset($_GET['action'])) {
     ]);
     curl_exec($ch);
     echo '</pre>';
+    echo '</div>';
 
-    echo '<h3>Events from User Calendar</h3>';
-    //echo '<h4>from: https://www.googleapis.com/calendar/v3/calendars/primary/events </h4>'
+    echo '<div class="w3-panel w3-pale-green w3-border">';
+    echo '<h3>Events from Google Calendar:</h3>';
+    echo '<h6>Google Calendar API URL: https://www.googleapis.com/calendar/v3/calendars/primary/events </h6>';
+    echo '<h6>Scope: https://www.googleapis.com/auth/calendar.readonly </h6>';
     echo '<pre>';
     $ch = curl_init('https://www.googleapis.com/calendar/v3/calendars/primary/events');
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -136,10 +174,57 @@ if(!isset($_GET['action'])) {
     ]);
     curl_exec($ch);
     echo '</pre>';
+    echo '</div>';
 
   } else {
-    echo '<h3>Not logged in</h3>';
-    echo '<p><a href="?action=login"><img src=SignInWithGoogle.jpg /></a></p>';
+    $params = array(
+      'response_type' => 'code',
+      'client_id' => 'client_id',
+      'redirect_uri' => $baseURL,
+      'scope' => 'openid email https://www.googleapis.com/auth/calendar.readonly',
+      'state' => bin2hex(random_bytes(16))
+    );
+
+    echo '<h3>You are not logged in. Click "Login with Google" button to login.</h3>';    
+    echo '<p>&nbsp;</p>';
+    echo '<div class="row">';
+    echo '<div class="col-md-3">';
+    echo '<a class="btn btn-outline-dark" href="?action=login" role="button" style="text-transform:none">';
+    echo '<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />';
+    echo 'Login with Google';
+    echo '</a>';
+    echo '</div>';
+    echo '</div>';
+    echo '<p>&nbsp;</p>';
+    echo '<div class="w3-panel w3-pale-yellow w3-border">';
+    echo '<h3>Step 1: Start the Sign in process by sending request to Google Authorize Endpoint. </h3>';
+    echo '<h6>'. $authorizeURL .'</h6>';
+    echo '<h6>Sample Request:</h6>';
+    echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
+    echo ''. $authorizeURL . '?' . http_build_query($params);
+    echo '</span>';
+    echo '</div>';
+    echo '<div class="w3-panel w3-pale-green w3-border">';
+    echo '<h3>Step 2: Exchange the code with token by sending request to Google Token Endpoint. </h3>';
+    echo '<h6>' .$tokenURL .'</h6>';
+    echo '</div>';
+    echo '<div class="w3-panel w3-pale-gray w3-border">';
+    echo '<h3>Google API Documentation</h3>';
+    echo '<h6>Using OAuth 2.0 to Access Google APIs: https://developers.google.com/identity/protocols/oauth2</h6>';
+    echo '<h6>Using OAuth 2.0 for Web Server Applications: https://developers.google.com/identity/protocols/oauth2/web-server</h6>';
+    echo '<h6>OAuth 2.0 Scopes for Google APIs: https://developers.google.com/identity/protocols/oauth2/scopes </h6>';
+    echo '</div>';
+    //echo '<p><a href="?action=login"><img src=SignInWithGoogle.jpg /></a></p>';
+    
   }
   die();
 }
+
+?>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+        crossorigin="anonymous">
+</script>
+</body>
+</html>
