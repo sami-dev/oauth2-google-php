@@ -28,7 +28,9 @@ $googleClientID = getenv("CLIENT_ID");
 $googleClientSecret = getenv("CLIENT_SECRET");
 $siteBaseURL = getenv("SITE_BASE_URL");
   
-echo 'googleClientID: ' . $googleClientID;
+echo '$googleClientID: ' . $googleClientID;
+echo '$googleClientSecret: ' . $$googleClientSecret;
+echo '$siteBaseURL: ' . $siteBaseURL;
 
 // This is the URL we'll send the user to first to get their authorization
 $authorizeURL = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -60,10 +62,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'login') {
     'scope' => 'openid email https://www.googleapis.com/auth/calendar.readonly',
     'state' => $_SESSION['state']
   );
+  
+  echo 'Location: ' . $authorizeURL . '?' . http_build_query($params);
 
   // Redirect the user to Google's authorization page
-  header('Location: ' . $authorizeURL . '?' . http_build_query($params));
-  die();
+  //header('Location: ' . $authorizeURL . '?' . http_build_query($params));
+  //die();
 }
 
 if(isset($_GET['action']) && $_GET['action'] == 'logout') {
