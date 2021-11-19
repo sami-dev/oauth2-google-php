@@ -64,8 +64,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'login') {
   );
   
   //echo 'Location: ' . $authorizeURL . '?' . http_build_query($params);
-  //$redirectUrl = $authorizeURL . '?' . http_build_query($params);
-  //echo '<a href=' . $redirectUrl  . '>Redirect the user to Google authorization page</a>';
+  $redirectUrl = $authorizeURL . '?' . http_build_query($params);
+  echo '<p><a href=' . $redirectUrl  . '>Redirect the user to Google authorization page</a></p>';
   // Redirect the user to Google's authorization page
   header('Location: ' . $authorizeURL . '?' . http_build_query($params));
   die();
@@ -120,6 +120,8 @@ if(isset($_GET['code'])) {
   $_SESSION['id_token'] = $data['id_token'];
   $_SESSION['userinfo'] = $userinfo;
 
+  echo '<p><a href=' . $baseURL  . '>Redirect the user to Main page</a></p>';
+  
   header('Location: ' . $baseURL);
   die();
 }
