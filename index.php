@@ -69,7 +69,6 @@ if(isset($_GET['action']) && $_GET['action'] == 'login') {
   // Redirect the user to Google's authorization page
   header('Location: ' . $authorizeURL . '?' . http_build_query($params));
   die();
-  exit();
 }
 
 if(isset($_GET['action']) && $_GET['action'] == 'logout') {
@@ -83,6 +82,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout') {
 if(isset($_GET['code'])) {
   // Verify the state matches our stored state
   if(!isset($_GET['state']) || $_SESSION['state'] != $_GET['state']) {
+    echo 'invalid state';
     header('Location: ' . $baseURL . '?error=invalid_state');
     die();
   }
