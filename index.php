@@ -77,6 +77,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout') {
   die();
 }
 
+echo 'Code ' . htmlspecialchars($_GET["code"]);
 // When Google redirects the user back here, there will be a "code" and "state"
 // parameter in the query string
 if(isset($_GET['code'])) {
