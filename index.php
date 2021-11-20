@@ -87,6 +87,7 @@ if(isset($_GET['code'])) {
     die();
   }
 
+  echo 'Exchange the auth code for a token';
   // Exchange the auth code for a token
   $ch = curl_init($tokenURL);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
