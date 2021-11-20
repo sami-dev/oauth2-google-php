@@ -83,9 +83,9 @@ echo 'Code ' . htmlspecialchars($_GET["code"]);
 if(isset($_GET['code'])) {
   // Verify the state matches our stored state
   if(!isset($_GET['state']) || $_SESSION['state'] != $_GET['state']) {
-    echo 'invalid state';
-    header('Location: ' . $baseURL . '?error=invalid_state');
-    die();
+    echo '<p>invalid state</p>';
+    //header('Location: ' . $baseURL . '?error=invalid_state');
+    //die();
   }
 
   echo 'Exchange the auth code for a token';
