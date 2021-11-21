@@ -229,9 +229,9 @@ if(!isset($_GET['action'])) {
     echo '</div>';
     echo '<div class="w3-panel w3-pale-gray w3-border">';
     echo '<h3>Google API Documentation</h3>';
-    echo '<h6>Using OAuth 2.0 to Access Google APIs: https://developers.google.com/identity/protocols/oauth2</h6>';
-    echo '<h6>Using OAuth 2.0 for Web Server Applications: https://developers.google.com/identity/protocols/oauth2/web-server</h6>';
-    echo '<h6>OAuth 2.0 Scopes for Google APIs: https://developers.google.com/identity/protocols/oauth2/scopes </h6>';
+    echo '<a href="https://developers.google.com/identity/protocols/oauth2" target="_blank">Using OAuth 2.0 to Access Google APIs</a>';
+    echo '<a href="https://developers.google.com/identity/protocols/oauth2/web-server" target="_blank">Using OAuth 2.0 for Web Server Applications</a>';
+    echo '<a href="https://developers.google.com/identity/protocols/oauth2/scopes" target="_blank">OAuth 2.0 Scopes for Google APIs</h6>';
     echo '</div>';
     //echo '<p><a href="?action=login"><img src=SignInWithGoogle.jpg /></a></p>';
     
