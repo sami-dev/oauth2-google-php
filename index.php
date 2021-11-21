@@ -129,7 +129,7 @@ if(isset($_GET['code'])) {
     echo '<p>Email: '.$_SESSION['email'].'</p>';
     //echo '<p><a href="?action=logout">Log Out</a></p>';
     //echo '<a href="?action=logout" class="btn btn-info btn-lg">';
-    echo '<a href="' .$siteBaseURL '" class="btn btn-info btn-lg">';
+    echo '<a href="'.$siteBaseURL.'" class="btn btn-info btn-lg">';
     echo '<span class="glyphicon glyphicon-log-out"></span> Log out';
     echo '</a>';
     echo '</div>';
