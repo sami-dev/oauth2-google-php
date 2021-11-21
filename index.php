@@ -21,6 +21,7 @@
     </div>
 </div>
 <?php
+
   
 // Start a session so we have a place to store things between redirects
 session_start();
@@ -64,6 +65,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'login') {
   //echo 'Location: ' . $authorizeURL . '?' . http_build_query($params);
   $redirectUrl = $authorizeURL . '?' . http_build_query($params);
   echo '<p><a href=' . $redirectUrl  . '>Redirect the user to Google authorization page</a></p>';
+  echo 'Session State:' . $_SESSION['state'];
   // Redirect the user to Google's authorization page
   header('Location: ' . $authorizeURL . '?' . http_build_query($params));
   die();
