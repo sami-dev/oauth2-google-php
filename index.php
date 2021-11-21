@@ -88,7 +88,7 @@ if(isset($_GET['code'])) {
     //die();
   }
 
-  echo 'Exchange the auth code for a token';
+  //echo 'Exchange the auth code for a token';
   // Exchange the auth code for a token
   $ch = curl_init($tokenURL);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -101,7 +101,7 @@ if(isset($_GET['code'])) {
   ]));
   $response = curl_exec($ch);
   $data = json_decode($response, true);
-  print_r($data);
+  //print_r($data);
 
   // Note: You'd probably want to use a real JWT library
   // but this will do in a pinch. This is only safe to do
@@ -128,7 +128,8 @@ if(isset($_GET['code'])) {
     echo '<p>User ID: '.$_SESSION['user_id'].'</p>';
     echo '<p>Email: '.$_SESSION['email'].'</p>';
     //echo '<p><a href="?action=logout">Log Out</a></p>';
-    echo '<a href="?action=logout" class="btn btn-info btn-lg">';
+    //echo '<a href="?action=logout" class="btn btn-info btn-lg">';
+    echo '<a href="' .$siteBaseURL '" class="btn btn-info btn-lg">';
     echo '<span class="glyphicon glyphicon-log-out"></span> Log out';
     echo '</a>';
     echo '</div>';
