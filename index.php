@@ -67,6 +67,10 @@ if(isset($_GET['action']) && $_GET['action'] == 'login') {
   echo '<div class="w3-panel w3-pale-yellow w3-border">';
   echo '<h3>Step 1: Start the Sign in process by sending request to Google Authorize Endpoint. </h3>';
   echo '<p><a href=' . $redirectUrl  . '>Redirect the user to Google authorization page</a></p>';
+  echo '<p><strong>Request:</strong></p>';
+  echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
+  echo ''. $redirectUrl;
+  echo '</span>';
   echo '</div>';
   //echo 'Session State:' . $_SESSION['state'];
   // Redirect the user to Google's authorization page
@@ -86,7 +90,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout') {
 if(isset($_GET['code'])) {
   // Verify the state matches our stored state
   if(!isset($_GET['state']) || $_SESSION['state'] != $_GET['state']) {
-    echo '<p>invalid state</p>';
+    //echo '<p>invalid state</p>';
     //header('Location: ' . $baseURL . '?error=invalid_state');
     //die();
   }
