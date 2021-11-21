@@ -125,6 +125,16 @@ if(isset($_GET['code'])) {
 
   echo '<p><a href=' . $baseURL  . '>Redirect the user to Main page</a></p>';
   
+    echo '<div class="w3-panel w3-pale-sand w3-border">';
+    echo '<h3>User Information:</h3>';
+    echo '<p>User ID: '.$_SESSION['user_id'].'</p>';
+    echo '<p>Email: '.$_SESSION['email'].'</p>';
+    //echo '<p><a href="?action=logout">Log Out</a></p>';
+    echo '<a href="?action=logout" class="btn btn-info btn-lg">';
+    echo '<span class="glyphicon glyphicon-log-out"></span> Log out';
+    echo '</a>';
+    echo '</div>';
+  
   header('Location: ' . $baseURL);
   die();
 }
