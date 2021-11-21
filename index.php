@@ -123,8 +123,6 @@ if(isset($_GET['code'])) {
   $_SESSION['id_token'] = $data['id_token'];
   $_SESSION['userinfo'] = $userinfo;
 
-  echo '<p><a href=' . $baseURL  . '>Redirect the user to Main page</a></p>';
-  
     echo '<div class="w3-panel w3-pale-sand w3-border">';
     echo '<h3>User Information:</h3>';
     echo '<p>User ID: '.$_SESSION['user_id'].'</p>';
@@ -134,9 +132,55 @@ if(isset($_GET['code'])) {
     echo '<span class="glyphicon glyphicon-log-out"></span> Log out';
     echo '</a>';
     echo '</div>';
+
+    echo '<div class="w3-panel w3-pale-yellow w3-border">';
+    echo '<h3>Id Token</h3>';
+    echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
+    print_r($_SESSION['id_token']);
+    echo '</span>';  
+    echo '</div>';
+
+    echo '<div class="w3-panel w3-pale-red w3-border">';
+    echo '<h3>Decoded Id Token</h3>';
+    echo '<pre>';
+    print_r($_SESSION['userinfo']);
+    echo '</pre>';
+    echo '</div>';
+    
+    echo '<div class="w3-panel w3-pale-orange w3-border">';
+    echo '<h3>Access Token</h3>';
+    echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
+    print_r($_SESSION['access_token']);
+    echo '</span>'; 
+    echo '</div>';
+
+    echo '<div class="w3-panel w3-pale-blue w3-border">';
+    echo '<h3>User Info</h3>';
+    echo '<h6>Google User Info API URL: https://www.googleapis.com/oauth2/v3/userinfo </h6>';
+    echo '<pre>';
+    $ch = curl_init('https://www.googleapis.com/oauth2/v3/userinfo');
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      'Authorization: Bearer '.$_SESSION['access_token']
+    ]);
+    curl_exec($ch);
+    echo '</pre>';
+    echo '</div>';
+
+    echo '<div class="w3-panel w3-pale-green w3-border">';
+    echo '<h3>Events from Google Calendar:</h3>';
+    echo '<h6>Google Calendar API URL: https://www.googleapis.com/calendar/v3/calendars/primary/events </h6>';
+    echo '<h6>Scope: https://www.googleapis.com/auth/calendar.readonly </h6>';
+    echo '<pre>';
+    $ch = curl_init('https://www.googleapis.com/calendar/v3/calendars/primary/events');
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      'Authorization: Bearer '.$_SESSION['access_token']
+    ]);
+    curl_exec($ch);
+    echo '</pre>';
+    echo '</div>';
   
-  header('Location: ' . $baseURL);
-  die();
+  //header('Location: ' . $baseURL);
+  //die();
 }
 
 // If there is a user ID in the session
