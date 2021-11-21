@@ -32,7 +32,7 @@ $googleClientID = getenv("CLIENT_ID");
 $googleClientSecret = getenv("CLIENT_SECRET");
 $siteBaseURL = getenv("SITE_BASE_URL");
   
-echo '$googleClientID: ' . $googleClientID;
+//echo '$googleClientID: ' . $googleClientID;
 //echo '$googleClientSecret: ' . $googleClientSecret;
 //echo '$siteBaseURL: ' . $siteBaseURL;
 
@@ -80,7 +80,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout') {
   die();
 }
 
-echo 'Code ' . htmlspecialchars($_GET["code"]);
+//echo 'Code ' . htmlspecialchars($_GET["code"]);
 // When Google redirects the user back here, there will be a "code" and "state"
 // parameter in the query string
 if(isset($_GET['code'])) {
