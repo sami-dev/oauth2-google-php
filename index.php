@@ -64,11 +64,14 @@ if(isset($_GET['action']) && $_GET['action'] == 'login') {
   
   //echo 'Location: ' . $authorizeURL . '?' . http_build_query($params);
   $redirectUrl = $authorizeURL . '?' . http_build_query($params);
+  echo '<div class="w3-panel w3-pale-yellow w3-border">';
+  echo '<h3>Step 1: Start the Sign in process by sending request to Google Authorize Endpoint. </h3>';
   echo '<p><a href=' . $redirectUrl  . '>Redirect the user to Google authorization page</a></p>';
-  echo 'Session State:' . $_SESSION['state'];
+  echo '</div>';
+  //echo 'Session State:' . $_SESSION['state'];
   // Redirect the user to Google's authorization page
-  header('Location: ' . $authorizeURL . '?' . http_build_query($params));
-  die();
+  //header('Location: ' . $authorizeURL . '?' . http_build_query($params));
+  //die();
 }
 
 if(isset($_GET['action']) && $_GET['action'] == 'logout') {
@@ -121,64 +124,7 @@ if(isset($_GET['code'])) {
   // so we can use them later
   $_SESSION['access_token'] = $data['access_token'];
   $_SESSION['id_token'] = $data['id_token'];
-  $_SESSION['userinfo'] = $userinfo;
-
-    echo '<div class="w3-panel w3-pale-sand w3-border">';
-    echo '<h3>User Information:</h3>';
-    echo '<p>User ID: '.$_SESSION['user_id'].'</p>';
-    echo '<p>Email: '.$_SESSION['email'].'</p>';
-    //echo '<p><a href="?action=logout">Log Out</a></p>';
-    //echo '<a href="?action=logout" class="btn btn-info btn-lg">';
-    echo '<a href="'.$siteBaseURL.'" class="btn btn-info btn-lg">';
-    echo '<span class="glyphicon glyphicon-log-out"></span> Log out';
-    echo '</a>';
-    echo '</div>';
-
-    echo '<div class="w3-panel w3-pale-yellow w3-border">';
-    echo '<h3>Id Token</h3>';
-    echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
-    print_r($_SESSION['id_token']);
-    echo '</span>';  
-    echo '</div>';
-
-    echo '<div class="w3-panel w3-pale-red w3-border">';
-    echo '<h3>Decoded Id Token</h3>';
-    echo '<pre>';
-    print_r($_SESSION['userinfo']);
-    echo '</pre>';
-    echo '</div>';
-    
-    echo '<div class="w3-panel w3-pale-orange w3-border">';
-    echo '<h3>Access Token</h3>';
-    echo '<span style="width:800px; word-wrap:break-word; display:inline-block;">';
-    print_r($_SESSION['access_token']);
-    echo '</span>'; 
-    echo '</div>';
-
-    echo '<div class="w3-panel w3-pale-blue w3-border">';
-    echo '<h3>User Info</h3>';
-    echo '<h6>Google User Info API URL: https://www.googleapis.com/oauth2/v3/userinfo </h6>';
-    echo '<pre>';
-    $ch = curl_init('https://www.googleapis.com/oauth2/v3/userinfo');
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-      'Authorization: Bearer '.$_SESSION['access_token']
-    ]);
-    curl_exec($ch);
-    echo '</pre>';
-    echo '</div>';
-
-    echo '<div class="w3-panel w3-pale-green w3-border">';
-    echo '<h3>Events from Google Calendar:</h3>';
-    echo '<h6>Google Calendar API URL: https://www.googleapis.com/calendar/v3/calendars/primary/events </h6>';
-    echo '<h6>Scope: https://www.googleapis.com/auth/calendar.readonly </h6>';
-    echo '<pre>';
-    $ch = curl_init('https://www.googleapis.com/calendar/v3/calendars/primary/events');
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-      'Authorization: Bearer '.$_SESSION['access_token']
-    ]);
-    curl_exec($ch);
-    echo '</pre>';
-    echo '</div>';
+  $_SESSION['userinfo'] = $userinfo;   
   
   //header('Location: ' . $baseURL);
   //die();
@@ -193,7 +139,8 @@ if(!isset($_GET['action'])) {
     echo '<p>User ID: '.$_SESSION['user_id'].'</p>';
     echo '<p>Email: '.$_SESSION['email'].'</p>';
     //echo '<p><a href="?action=logout">Log Out</a></p>';
-    echo '<a href="?action=logout" class="btn btn-info btn-lg">';
+    //echo '<a href="?action=logout" class="btn btn-info btn-lg">';
+    echo '<a href="'.$siteBaseURL.'" class="btn btn-info btn-lg">';
     echo '<span class="glyphicon glyphicon-log-out"></span> Log out';
     echo '</a>';
     echo '</div>';
